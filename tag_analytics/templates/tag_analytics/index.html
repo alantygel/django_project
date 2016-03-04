@@ -1,0 +1,20 @@
+<a href="/tag_analytics/load_all">LOAD ALL</a>
+{% if opendataportal_list %}
+	<ul>
+	{% for opendataportal in opendataportal_list %}
+		<li>{{ opendataportal.name }} - {{ opendataportal.url }} ({{ opendataportal.loadround_set.last.tag_set.count }}) @ {{ opendataportal.loadround_set.last.odpmetadata_set.last.insert_date}}</li>
+			<ul>
+		{% if opendataportal.loadround_set.count > 0 %}
+			{% for r in opendataportal.loadround_set.all %}
+				<li><a href="{{opendataportal.id}}/load/{{ r.roundn }}">Reload Round: {{r.tag_set.count}} | {{r.dataset_set.count}} | {{r.group_set.count}}</a></li>
+			{% endfor %}
+		{% else %}
+			<li><a href="{{opendataportal.id}}/load/">Load New Round</a></li>
+		{% endif %}
+			</ul>
+	{% endfor %}
+	</ul>
+{% else %}
+    <p>No data available.</p>
+{% endif %}
+

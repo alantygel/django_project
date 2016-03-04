@@ -1,0 +1,10 @@
+{% if opendataportal %}
+	{% for round in opendataportal.loadround_set.all %}
+		<p>Tags: {{ round.tag_set.count }}</p>
+		<p>Datasets: {{ round.dataset_set.count }}</p>		
+		<p>Groups: {{ round.group_set.count }}</p>	
+	{% endfor %}
+{% else %}
+    <p>No data available.</p>
+{% endif %}
+
